@@ -43,9 +43,9 @@ st.markdown(
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
     :root {
-      --bg:
-      --text:
-      --coral:
+      --bg: #0B0F17; --panel: #151A23; --panel2: #1C222D; --panel3: #252B36;
+      --text: #DFE2EE; --muted: #9AA3B5; --cyan: #06B6D4; --cyan2: #4CD7F6;
+      --coral: #F43F5E; --indigo: #818CF8; --amber: #F59E0B; --green: #10B981;
       --line: rgba(255,255,255,.09);
     }
     html, body, [class*="css"], [data-testid="stAppViewContainer"] {
@@ -59,7 +59,7 @@ st.markdown(
     .block-container { max-width: 1680px; padding-top: 4.5rem; padding-bottom: 3rem; }
 
     section[data-testid="stSidebar"] {
-      background:
+      background: #090D14; border-right: 1px solid rgba(255,255,255,.06); min-width: 250px;
     }
     section[data-testid="stSidebar"] > div { padding-top: 1.15rem; }
     section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p { color: var(--muted); }
@@ -67,7 +67,7 @@ st.markdown(
     .brand-row { display:flex; align-items:center; gap:11px; padding: 5px 4px 18px 4px; }
     .brand-mark {
       width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-      color:
+      color:#DDE0FF;background:linear-gradient(145deg,#292B58,#131B32);
       border:1px solid rgba(129,140,248,.30);box-shadow:0 0 22px rgba(129,140,248,.18);
       font-size:19px;font-weight:800;
     }
@@ -81,7 +81,7 @@ st.markdown(
     .pipeline-top { color:var(--muted);font:700 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase; }
     .pipeline-name { color:var(--text);font:600 12px 'JetBrains Mono',monospace;margin-top:5px; }
     .status-dot { display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--cyan2);box-shadow:0 0 10px var(--cyan2);margin-right:7px; }
-    .telemetry-box { background:
+    .telemetry-box { background:#151A23;border:1px solid var(--line);border-radius:13px;padding:12px 13px;margin-top:28px; }
     .telemetry-label { color:var(--muted);font:700 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase; }
     .telemetry-grid { display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px; }
     .telemetry-value { font:700 21px 'JetBrains Mono',monospace;color:var(--text); }
@@ -90,15 +90,15 @@ st.markdown(
     div[role="radiogroup"] { gap:10px !important; }
     div[role="radiogroup"] label {
       background:transparent;border:1px solid transparent;border-radius:10px;padding:11px 14px !important;
-      color:
+      color:#BFC5D4 !important;transition:all .15s ease;font-size:13px;
     }
     div[role="radiogroup"] label:hover { background:rgba(129,140,248,.08);border-color:rgba(129,140,248,.15); }
     div[role="radiogroup"] label[data-checked="true"] {
       background:linear-gradient(90deg,rgba(129,140,248,.17),rgba(6,182,212,.06));
-      border-color:rgba(129,140,248,.22);color:
+      border-color:rgba(129,140,248,.22);color:#F2F3FF !important;
     }
     .topbar { display:flex;align-items:center;gap:10px;margin-bottom:16px; }
-    .ready-pill { display:inline-flex;align-items:center;gap:7px;background:
+    .ready-pill { display:inline-flex;align-items:center;gap:7px;background:#202632;border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:#BFC8D8;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.08em;white-space:nowrap; }
     .ready-pill:before { content:'';width:7px;height:7px;border-radius:50%;background:var(--cyan2);box-shadow:0 0 9px var(--cyan2); }
     .page-title { font-size:clamp(25px,3vw,38px);font-weight:800;letter-spacing:-.045em;line-height:1.12;margin:3px 0 8px 0;color:var(--text); }
     .page-description { color:var(--muted);font:13px/1.7 'JetBrains Mono',monospace;max-width:850px;margin-bottom:17px; }
@@ -107,24 +107,24 @@ st.markdown(
     .section-kicker { color:var(--muted);font:700 11px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.13em; }
 
     .glass-card { background:linear-gradient(145deg,rgba(28,34,45,.94),rgba(21,26,35,.94));border:1px solid var(--line);border-radius:15px;padding:16px 17px;box-shadow:0 10px 30px rgba(0,0,0,.12); }
-    .metric-card { min-height:116px;background:linear-gradient(145deg,
+    .metric-card { min-height:116px;background:linear-gradient(145deg,#181E28,#141922);border:1px solid var(--line);border-radius:13px;padding:15px 16px;position:relative;overflow:hidden;margin-bottom:4px; }
     .metric-card:after { content:'';position:absolute;left:15px;right:15px;bottom:0;height:3px;background:var(--metric-accent,var(--cyan));border-radius:99px;opacity:.9; }
     .metric-label { color:var(--muted);font:700 11px 'JetBrains Mono',monospace;letter-spacing:.11em;text-transform:uppercase; }
     .metric-value { color:var(--text);font:700 clamp(24px,2.6vw,34px) 'JetBrains Mono',monospace;letter-spacing:-.05em;margin-top:12px;line-height:1.05; }
     .metric-foot { color:var(--muted);font:12px 'JetBrains Mono',monospace;margin-top:8px; }
     .tag { display:inline-block;padding:4px 8px;border-radius:999px;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.04em;background:rgba(6,182,212,.12);color:var(--cyan2);border:1px solid rgba(6,182,212,.18); }
-    .tag-risk { background:rgba(244,63,94,.13);color:
-    .tag-warn { background:rgba(245,158,11,.13);color:
-    .tag-green { background:rgba(16,185,129,.13);color:
+    .tag-risk { background:rgba(244,63,94,.13);color:#FDA4AF;border-color:rgba(244,63,94,.22); }
+    .tag-warn { background:rgba(245,158,11,.13);color:#FCD34D;border-color:rgba(245,158,11,.22); }
+    .tag-green { background:rgba(16,185,129,.13);color:#6EE7B7;border-color:rgba(16,185,129,.22); }
 
     .result-card { border:1px solid var(--result-color,var(--cyan));background:linear-gradient(145deg,rgba(21,26,35,.96),rgba(21,26,35,.78));border-radius:15px;padding:19px;box-shadow:0 0 24px color-mix(in srgb,var(--result-color,var(--cyan)) 16%,transparent); }
     .result-title { font-size:21px;font-weight:800;margin:0 0 5px 0; }
-    .result-copy { color:
+    .result-copy { color:#B8C1D1;font-size:12px;line-height:1.6;margin:0; }
     .mono { font-family:'JetBrains Mono',monospace; }
     .muted { color:var(--muted); }
 
     /* Progress bar for churn probability */
-    .prob-bar-wrap { background:
+    .prob-bar-wrap { background:#1A2030;border-radius:999px;height:8px;margin:10px 0; }
     .prob-bar-fill { height:8px;border-radius:999px;transition:width .4s ease; }
 
     div[data-testid="stForm"] { background:transparent;border:0;padding:0; }
@@ -135,17 +135,17 @@ st.markdown(
     }
     .stButton > button:hover, .stDownloadButton > button:hover { border-color:var(--cyan);color:white;box-shadow:0 0 15px rgba(6,182,212,.14); }
     div[data-testid="stFormSubmitButton"] > button[kind="primary"], .stButton > button[kind="primary"] {
-      background:linear-gradient(100deg,
+      background:linear-gradient(100deg,#F43F5E,#FB5870);border:0;color:white;box-shadow:0 5px 20px rgba(244,63,94,.2);
     }
-    div[data-testid="stFormSubmitButton"] > button[kind="primary"]:hover, .stButton > button[kind="primary"]:hover { filter:brightness(1.08);color:
+    div[data-testid="stFormSubmitButton"] > button[kind="primary"]:hover, .stButton > button[kind="primary"]:hover { filter:brightness(1.08);color:#fff; }
 
     input, textarea { color:var(--text) !important; }
     div[data-baseweb="select"] > div, div[data-baseweb="input"] > div, div[data-baseweb="textarea"] > div {
-      background:
+      background:#252B36 !important;border-color:rgba(255,255,255,.08) !important;border-radius:9px !important;
     }
     div[data-baseweb="select"] span, div[data-baseweb="input"] input { color:var(--text) !important; }
     label, .stMarkdown p, .stCaption { color:var(--text); }
-    [data-testid="stMetric"] { background:
+    [data-testid="stMetric"] { background:#171D27;border:1px solid var(--line);border-radius:12px;padding:12px 14px; }
     [data-testid="stMetricLabel"] { color:var(--muted) !important; }
     [data-testid="stMetricValue"] { font-family:'JetBrains Mono',monospace;color:var(--text) !important; }
     [data-testid="stDataFrame"] { border:1px solid var(--line);border-radius:12px;overflow:hidden; }
