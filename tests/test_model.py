@@ -37,11 +37,9 @@ def test_model_probability_range(trained_model, sample_features):
 
 def test_model_feature_requirements(trained_model):
     """Test that model requires expected number of features."""
-    # The model should have a preprocessor that knows the feature names
     if hasattr(trained_model, 'named_steps'):
         preprocessor = trained_model.named_steps.get('preprocessor')
         if preprocessor is not None:
-            # Check that preprocessor was fitted
             assert hasattr(preprocessor, 'transformers_')
 
 
@@ -55,13 +53,12 @@ def test_prediction_consistency(trained_model, sample_features):
 
 def test_high_risk_customer_detected(trained_model):
     """Test that model correctly identifies high-risk customer profile."""
-    # Create a high-risk profile: short tenure, month-to-month, electronic check
     high_risk = pd.DataFrame({
         'gender': ['Male'],
         'SeniorCitizen': [0],
         'Partner': ['No'],
         'Dependents': ['No'],
-        'tenure': [1],  # Very short tenure
+        'tenure': [1],
         'PhoneService': ['Yes'],
         'MultipleLines': ['No'],
         'InternetService': ['Fiber optic'],
@@ -71,10 +68,10 @@ def test_high_risk_customer_detected(trained_model):
         'TechSupport': ['No'],
         'StreamingTV': ['No'],
         'StreamingMovies': ['No'],
-        'Contract': ['Month-to-month'],  # Risky
+        'Contract': ['Month-to-month'],
         'PaperlessBilling': ['Yes'],
-        'PaymentMethod': ['Electronic check'],  # Risky
-        'MonthlyCharges': [85.0],  # High charges
+        'PaymentMethod': ['Electronic check'],
+        'MonthlyCharges': [85.0],
         'TotalCharges': [85.0]
     })
 
@@ -84,13 +81,12 @@ def test_high_risk_customer_detected(trained_model):
 
 def test_low_risk_customer_detected(trained_model):
     """Test that model correctly identifies low-risk customer profile."""
-    # Create a low-risk profile: long tenure, two-year contract, stable payment
     low_risk = pd.DataFrame({
         'gender': ['Female'],
         'SeniorCitizen': [0],
         'Partner': ['Yes'],
         'Dependents': ['Yes'],
-        'tenure': [72],  # Long tenure
+        'tenure': [72],
         'PhoneService': ['Yes'],
         'MultipleLines': ['Yes'],
         'InternetService': ['DSL'],
@@ -100,9 +96,9 @@ def test_low_risk_customer_detected(trained_model):
         'TechSupport': ['Yes'],
         'StreamingTV': ['Yes'],
         'StreamingMovies': ['Yes'],
-        'Contract': ['Two year'],  # Stable
+        'Contract': ['Two year'],
         'PaperlessBilling': ['No'],
-        'PaymentMethod': ['Credit card (automatic)'],  # Stable
+        'PaymentMethod': ['Credit card (automatic)'],
         'MonthlyCharges': [55.0],
         'TotalCharges': [3960.0]
     })
@@ -118,7 +114,7 @@ def test_model_handles_missing_values(trained_model):
         'SeniorCitizen': [0],
         'Partner': ['No'],
         'Dependents': ['No'],
-        'tenure': [0],  # New customer
+        'tenure': [0],
         'PhoneService': ['No'],
         'MultipleLines': ['No phone service'],
         'InternetService': ['No'],
@@ -132,10 +128,9 @@ def test_model_handles_missing_values(trained_model):
         'PaperlessBilling': ['Yes'],
         'PaymentMethod': ['Electronic check'],
         'MonthlyCharges': [20.0],
-        'TotalCharges': [0.0]  # Zero total charges
+        'TotalCharges': [0.0]
     })
 
-    # Should not raise an error
     prediction = trained_model.predict(edge_case)
     proba = trained_model.predict_proba(edge_case)
 

@@ -141,7 +141,6 @@ def mock_streamlit_session(monkeypatch):
             else:
                 self._state[item] = value
 
-    # Mock streamlit imports
     monkeypatch.setattr("streamlit.session_state", MockSessionState())
     yield session_state
 
@@ -154,7 +153,7 @@ def churn_rates():
         dict: Known churn rates for validation
     """
     return {
-        'overall': 0.2656,  # 26.56% overall churn rate
+        'overall': 0.2656,
         'contract': {
             'Month-to-month': 0.4270,
             'One year': 0.1130,

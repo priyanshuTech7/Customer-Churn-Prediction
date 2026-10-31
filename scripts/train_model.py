@@ -23,25 +23,21 @@ from sklearn.metrics import (
 )
 
 
-# ── Project paths ─────────────────────────────────────────────────────────────
 BASE_DIR   = Path(__file__).resolve().parent.parent
 DATA_PATH  = BASE_DIR / "data" / "WA_Fn-UseC_-Telco-Customer-Churn.csv"
 MODEL_DIR  = BASE_DIR / "models"
 MODEL_PATH = MODEL_DIR / "customer_churn_model.pkl"
 
 
-# ── 1. Load ───────────────────────────────────────────────────────────────────
 print("Loading dataset...")
 df = pd.read_csv(DATA_PATH)
 print("Dataset shape:", df.shape)
 
 
-# ── 2. Clean ──────────────────────────────────────────────────────────────────
 df["TotalCharges"] = pd.to_numeric(df["TotalCharges"], errors="coerce").fillna(0)
 df = df.drop(columns=["customerID"])
 
 
-# ── 3. Features / target ──────────────────────────────────────────────────────
 X = df.drop(columns=["Churn"])
 y = df["Churn"].map({"No": 0, "Yes": 1})
 
@@ -55,21 +51,18 @@ print("Numeric features    :", numeric_features)
 print("Categorical features:", categorical_features)
 
 
-# ── 4. Train / test split ─────────────────────────────────────────────────────
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 print(f"\nTrain: {len(X_train)}  Test: {len(X_test)}")
 
 
-# ── 5. Shared preprocessor ────────────────────────────────────────────────────
 preprocessor = ColumnTransformer(transformers=[
     ("num", StandardScaler(),                       numeric_features),
     ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_features),
 ])
 
 
-# ── 6. Multi-model comparison ─────────────────────────────────────────────────
 CANDIDATES = {
     "Logistic Regression": LogisticRegression(
         max_iter=1000, random_state=42, class_weight="balanced"
@@ -108,7 +101,6 @@ for name, clf in CANDIDATES.items():
     )
 
 
-# ── 7. Final model — Balanced Logistic Regression ────────────────────────────
 print("\nTraining final model (Balanced Logistic Regression)...")
 final_model = Pipeline([
     ("preprocessor", preprocessor),
@@ -119,7 +111,6 @@ final_model = Pipeline([
 final_model.fit(X_train, y_train)
 
 
-# ── 8. Full evaluation ────────────────────────────────────────────────────────
 predictions  = final_model.predict(X_test)
 probabilities = final_model.predict_proba(X_test)[:, 1]
 
@@ -143,7 +134,6 @@ print(classification_report(y_test, predictions, target_names=["No Churn", "Chur
 print("Confusion Matrix:\n", cm)
 
 
-# ── 9. Save everything in one PKL ─────────────────────────────────────────────
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
 metrics = {
@@ -154,7 +144,6 @@ metrics = {
     "roc_auc":   float(roc_auc),
 }
 
-# Attach extra data to the pipeline object
 final_model.evaluation_metrics_ = metrics
 final_model.confusion_matrix_   = cm.tolist()
 final_model.roc_curve_          = {"fpr": fpr.tolist(), "tpr": tpr.tolist()}
