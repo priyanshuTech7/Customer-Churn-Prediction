@@ -56,10 +56,29 @@ st.markdown(
     [data-testid="stToolbar"] { right: 1rem; }
     [data-testid="stDecoration"] { display: none; }
     [data-testid="stStatusWidget"] { display: none; }
-    .block-container { max-width: 1680px; padding-top: 4.5rem; padding-bottom: 3rem; }
 
+    [data-testid="stMain"] {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .main .block-container,
+    .block-container,
+    [data-testid="stMainBlockContainer"] {
+      max-width: 1680px;
+      width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      padding-top: 4.5rem;
+      padding-bottom: 3rem;
+    }
+
+    section[data-testid="stSidebar"][aria-expanded="true"] {
+      min-width: 250px;
+    }
     section[data-testid="stSidebar"] {
-      background: #090D14; border-right: 1px solid rgba(255,255,255,.06); min-width: 250px;
+      background: #090D14; border-right: 1px solid rgba(255,255,255,.06);
     }
     section[data-testid="stSidebar"] > div { padding-top: 1.15rem; }
     section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p { color: var(--muted); }
