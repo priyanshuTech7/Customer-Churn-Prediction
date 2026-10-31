@@ -10,9 +10,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
-# -----------------------------------------------------------------------------
-# Churn Project — Streamlit implementation of the Churn Project dashboard
-# -----------------------------------------------------------------------------
 
 st.set_page_config(
     page_title="Churn Project | Customer Churn Intelligence",
@@ -25,7 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent if Path(__file__).resolve().pa
 DATA_PATH = BASE_DIR / "data" / "WA_Fn-UseC_-Telco-Customer-Churn.csv"
 MODEL_PATH = BASE_DIR / "models" / "customer_churn_model.pkl"
 
-# Design-system colors
 BG      = "#0B0F17"
 PANEL   = "#151A23"
 PANEL_2 = "#1C222D"
@@ -41,18 +37,15 @@ AMBER       = "#F59E0B"
 GREEN       = "#10B981"
 CHURN_COLORS = {"No": CYAN, "Yes": CORAL}
 
-# -----------------------------------------------------------------------------
-# CSS — dark cybernetic dashboard
-# -----------------------------------------------------------------------------
 st.markdown(
     """
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
     :root {
-      --bg: #0B0F17; --panel: #151A23; --panel2: #1C222D; --panel3: #252B36;
-      --text: #DFE2EE; --muted: #9AA3B5; --cyan: #06B6D4; --cyan2: #4CD7F6;
-      --coral: #F43F5E; --indigo: #818CF8; --amber: #F59E0B; --green: #10B981;
+      --bg:
+      --text:
+      --coral:
       --line: rgba(255,255,255,.09);
     }
     html, body, [class*="css"], [data-testid="stAppViewContainer"] {
@@ -66,7 +59,7 @@ st.markdown(
     .block-container { max-width: 1680px; padding-top: 4.5rem; padding-bottom: 3rem; }
 
     section[data-testid="stSidebar"] {
-      background: #090D14; border-right: 1px solid rgba(255,255,255,.06); min-width: 250px;
+      background:
     }
     section[data-testid="stSidebar"] > div { padding-top: 1.15rem; }
     section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p { color: var(--muted); }
@@ -74,7 +67,7 @@ st.markdown(
     .brand-row { display:flex; align-items:center; gap:11px; padding: 5px 4px 18px 4px; }
     .brand-mark {
       width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-      color:#DDE0FF;background:linear-gradient(145deg,#292B58,#131B32);
+      color:
       border:1px solid rgba(129,140,248,.30);box-shadow:0 0 22px rgba(129,140,248,.18);
       font-size:19px;font-weight:800;
     }
@@ -88,7 +81,7 @@ st.markdown(
     .pipeline-top { color:var(--muted);font:700 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase; }
     .pipeline-name { color:var(--text);font:600 12px 'JetBrains Mono',monospace;margin-top:5px; }
     .status-dot { display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--cyan2);box-shadow:0 0 10px var(--cyan2);margin-right:7px; }
-    .telemetry-box { background:#151A23;border:1px solid var(--line);border-radius:13px;padding:12px 13px;margin-top:28px; }
+    .telemetry-box { background:
     .telemetry-label { color:var(--muted);font:700 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase; }
     .telemetry-grid { display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px; }
     .telemetry-value { font:700 21px 'JetBrains Mono',monospace;color:var(--text); }
@@ -97,15 +90,15 @@ st.markdown(
     div[role="radiogroup"] { gap:10px !important; }
     div[role="radiogroup"] label {
       background:transparent;border:1px solid transparent;border-radius:10px;padding:11px 14px !important;
-      color:#BFC5D4 !important;transition:all .15s ease;font-size:13px;
+      color:
     }
     div[role="radiogroup"] label:hover { background:rgba(129,140,248,.08);border-color:rgba(129,140,248,.15); }
     div[role="radiogroup"] label[data-checked="true"] {
       background:linear-gradient(90deg,rgba(129,140,248,.17),rgba(6,182,212,.06));
-      border-color:rgba(129,140,248,.22);color:#F2F3FF !important;
+      border-color:rgba(129,140,248,.22);color:
     }
     .topbar { display:flex;align-items:center;gap:10px;margin-bottom:16px; }
-    .ready-pill { display:inline-flex;align-items:center;gap:7px;background:#202632;border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:#BFC8D8;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.08em;white-space:nowrap; }
+    .ready-pill { display:inline-flex;align-items:center;gap:7px;background:
     .ready-pill:before { content:'';width:7px;height:7px;border-radius:50%;background:var(--cyan2);box-shadow:0 0 9px var(--cyan2); }
     .page-title { font-size:clamp(25px,3vw,38px);font-weight:800;letter-spacing:-.045em;line-height:1.12;margin:3px 0 8px 0;color:var(--text); }
     .page-description { color:var(--muted);font:13px/1.7 'JetBrains Mono',monospace;max-width:850px;margin-bottom:17px; }
@@ -114,24 +107,24 @@ st.markdown(
     .section-kicker { color:var(--muted);font:700 11px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.13em; }
 
     .glass-card { background:linear-gradient(145deg,rgba(28,34,45,.94),rgba(21,26,35,.94));border:1px solid var(--line);border-radius:15px;padding:16px 17px;box-shadow:0 10px 30px rgba(0,0,0,.12); }
-    .metric-card { min-height:116px;background:linear-gradient(145deg,#181E28,#141922);border:1px solid var(--line);border-radius:13px;padding:15px 16px;position:relative;overflow:hidden;margin-bottom:4px; }
+    .metric-card { min-height:116px;background:linear-gradient(145deg,
     .metric-card:after { content:'';position:absolute;left:15px;right:15px;bottom:0;height:3px;background:var(--metric-accent,var(--cyan));border-radius:99px;opacity:.9; }
     .metric-label { color:var(--muted);font:700 11px 'JetBrains Mono',monospace;letter-spacing:.11em;text-transform:uppercase; }
     .metric-value { color:var(--text);font:700 clamp(24px,2.6vw,34px) 'JetBrains Mono',monospace;letter-spacing:-.05em;margin-top:12px;line-height:1.05; }
     .metric-foot { color:var(--muted);font:12px 'JetBrains Mono',monospace;margin-top:8px; }
     .tag { display:inline-block;padding:4px 8px;border-radius:999px;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.04em;background:rgba(6,182,212,.12);color:var(--cyan2);border:1px solid rgba(6,182,212,.18); }
-    .tag-risk { background:rgba(244,63,94,.13);color:#FDA4AF;border-color:rgba(244,63,94,.22); }
-    .tag-warn { background:rgba(245,158,11,.13);color:#FCD34D;border-color:rgba(245,158,11,.22); }
-    .tag-green { background:rgba(16,185,129,.13);color:#6EE7B7;border-color:rgba(16,185,129,.22); }
+    .tag-risk { background:rgba(244,63,94,.13);color:
+    .tag-warn { background:rgba(245,158,11,.13);color:
+    .tag-green { background:rgba(16,185,129,.13);color:
 
     .result-card { border:1px solid var(--result-color,var(--cyan));background:linear-gradient(145deg,rgba(21,26,35,.96),rgba(21,26,35,.78));border-radius:15px;padding:19px;box-shadow:0 0 24px color-mix(in srgb,var(--result-color,var(--cyan)) 16%,transparent); }
     .result-title { font-size:21px;font-weight:800;margin:0 0 5px 0; }
-    .result-copy { color:#B8C1D1;font-size:12px;line-height:1.6;margin:0; }
+    .result-copy { color:
     .mono { font-family:'JetBrains Mono',monospace; }
     .muted { color:var(--muted); }
 
     /* Progress bar for churn probability */
-    .prob-bar-wrap { background:#1A2030;border-radius:999px;height:8px;margin:10px 0; }
+    .prob-bar-wrap { background:
     .prob-bar-fill { height:8px;border-radius:999px;transition:width .4s ease; }
 
     div[data-testid="stForm"] { background:transparent;border:0;padding:0; }
@@ -142,17 +135,17 @@ st.markdown(
     }
     .stButton > button:hover, .stDownloadButton > button:hover { border-color:var(--cyan);color:white;box-shadow:0 0 15px rgba(6,182,212,.14); }
     div[data-testid="stFormSubmitButton"] > button[kind="primary"], .stButton > button[kind="primary"] {
-      background:linear-gradient(100deg,#F43F5E,#FB5870);border:0;color:white;box-shadow:0 5px 20px rgba(244,63,94,.2);
+      background:linear-gradient(100deg,
     }
-    div[data-testid="stFormSubmitButton"] > button[kind="primary"]:hover, .stButton > button[kind="primary"]:hover { filter:brightness(1.08);color:#fff; }
+    div[data-testid="stFormSubmitButton"] > button[kind="primary"]:hover, .stButton > button[kind="primary"]:hover { filter:brightness(1.08);color:
 
     input, textarea { color:var(--text) !important; }
     div[data-baseweb="select"] > div, div[data-baseweb="input"] > div, div[data-baseweb="textarea"] > div {
-      background:#252B36 !important;border-color:rgba(255,255,255,.08) !important;border-radius:9px !important;
+      background:
     }
     div[data-baseweb="select"] span, div[data-baseweb="input"] input { color:var(--text) !important; }
     label, .stMarkdown p, .stCaption { color:var(--text); }
-    [data-testid="stMetric"] { background:#171D27;border:1px solid var(--line);border-radius:12px;padding:12px 14px; }
+    [data-testid="stMetric"] { background:
     [data-testid="stMetricLabel"] { color:var(--muted) !important; }
     [data-testid="stMetricValue"] { font-family:'JetBrains Mono',monospace;color:var(--text) !important; }
     [data-testid="stDataFrame"] { border:1px solid var(--line);border-radius:12px;overflow:hidden; }
@@ -170,17 +163,12 @@ st.markdown(
 )
 
 
-# -----------------------------------------------------------------------------
-# Data & model loading — defined BEFORE use
-# -----------------------------------------------------------------------------
 @st.cache_data(show_spinner="Loading the Telco customer dataset...")
 def load_data(path: str) -> pd.DataFrame:
     data = pd.read_csv(path)
-    # Coerce TotalCharges to numeric; the 11 zero-tenure rows become 0
     data["TotalCharges"] = pd.to_numeric(data["TotalCharges"], errors="coerce").fillna(0)
     data = data.reset_index(drop=True)
     data["SeniorLabel"] = data["SeniorCitizen"].map({0: "Non-senior", 1: "Senior"})
-    # Derived: average monthly spend (safe for zero-tenure rows)
     data["AvgMonthlySpend"] = np.where(
         data["tenure"] > 0,
         data["TotalCharges"] / data["tenure"],
@@ -213,7 +201,6 @@ except Exception as exc:
     st.stop()
 
 
-# Pull metrics stored on the pipeline at training time
 saved_metrics  = getattr(model, "evaluation_metrics_", {})
 saved_cm       = getattr(model, "confusion_matrix_", [[747, 288], [81, 293]])
 saved_roc      = getattr(model, "roc_curve_", None)
@@ -230,9 +217,6 @@ MODEL_F1        = saved_metrics.get("f1_score",  0.6136) * 100
 MODEL_ROC_AUC   = saved_metrics.get("roc_auc",   0.8416)
 
 
-# -----------------------------------------------------------------------------
-# Helper — shared chart styling
-# -----------------------------------------------------------------------------
 def style_fig(fig: go.Figure, height: int = 330) -> go.Figure:
     fig.update_layout(
         template="plotly_dark",
@@ -274,9 +258,6 @@ def section_title(title: str, subtitle: str = "") -> None:
     )
 
 
-# -----------------------------------------------------------------------------
-# Analytics helpers
-# -----------------------------------------------------------------------------
 def churn_rate_by(data: pd.DataFrame, column: str, title: str) -> go.Figure:
     rates = (
         data.groupby(column, dropna=False)["Churn"]
@@ -395,9 +376,6 @@ def plot_model_comparison(comparison_data: dict) -> go.Figure | None:
     return style_fig(fig, 340)
 
 
-# -----------------------------------------------------------------------------
-# Model-interpretability helpers
-# -----------------------------------------------------------------------------
 def model_parts():
     """Return (preprocessor, classifier) steps from the saved sklearn pipeline."""
     try:
@@ -449,9 +427,6 @@ def global_coefficients() -> pd.DataFrame | None:
         return None
 
 
-# -----------------------------------------------------------------------------
-# Retention-action recommendation engine
-# -----------------------------------------------------------------------------
 def retention_actions(customer: dict[str, Any]) -> list[str]:
     actions: list[str] = []
     if customer["Contract"] == "Month-to-month":
@@ -479,9 +454,6 @@ def retention_actions(customer: dict[str, Any]) -> list[str]:
     return actions or ["No specific risk trigger identified. Maintain current service level and monitor the account."]
 
 
-# -----------------------------------------------------------------------------
-# Risk tier helper — single source of truth
-# -----------------------------------------------------------------------------
 def risk_tier(percent: float) -> tuple[str, str, str]:
     if percent >= 70:
         return "Critical churn risk", CORAL, "Immediate retention intervention strongly recommended."
@@ -492,9 +464,6 @@ def risk_tier(percent: float) -> tuple[str, str, str]:
     return "Low churn risk", CYAN, "The current profile is consistent with customer retention."
 
 
-# -----------------------------------------------------------------------------
-# Input defaults and sample profiles
-# -----------------------------------------------------------------------------
 DEFAULTS: dict[str, Any] = {
     "gender": "Male", "senior": "No", "partner": "Yes", "dependents": "No",
     "tenure": 12, "phone": "Yes", "lines": "No", "internet": "DSL",
@@ -638,9 +607,6 @@ def build_customer_from_state() -> dict[str, Any]:
     }
 
 
-# -----------------------------------------------------------------------------
-# Sidebar — brand, navigation, telemetry
-# -----------------------------------------------------------------------------
 with st.sidebar:
     st.markdown(
         '<div class="brand-row"><div class="brand-mark">✣</div>'
@@ -689,9 +655,6 @@ with st.sidebar:
     )
 
 
-# -----------------------------------------------------------------------------
-# Global header row — search bar, inference badge, export
-# -----------------------------------------------------------------------------
 header_search_col, header_status_col, header_export_col = st.columns([6, 1.7, 1.5], vertical_alignment="center")
 with header_search_col:
     search_query = st.text_input(
@@ -735,9 +698,6 @@ if search_query.strip():
                 st.rerun()
 
 
-# =============================================================================
-# PAGE: Predict
-# =============================================================================
 if page == "Predict":
     page_header(
         "Production-style local inference  /  Customer simulator",
@@ -757,7 +717,6 @@ if page == "Predict":
 
     form_col, result_col = st.columns([1.52, 1], gap="large")
     with form_col:
-        # ── Database Customer Selector & Lookup ─────────────────────────────
         with st.container(border=True):
             section_title("🔍  Search & Load Customer from Database", "Search by Customer ID or filter features to test any of the 7,043 customers")
             st.write("")
@@ -861,7 +820,6 @@ if page == "Predict":
 
             submitted = st.form_submit_button("⚡  Predict churn risk", type="primary", use_container_width=True)
 
-    # Run inference
     if submitted:
         customer       = build_customer_from_state()
         customer_frame = pd.DataFrame([customer])
@@ -881,7 +839,6 @@ if page == "Predict":
             st.error(f"The model could not score this customer: {exc}")
             st.session_state.pop("last_prediction", None)
 
-    # Results panel
     with result_col:
         last = st.session_state.get("last_prediction")
         if last:
@@ -890,7 +847,6 @@ if page == "Predict":
             customer    = last["customer"]
             label, color, message = risk_tier(percent)
 
-            # Verified Database Match Card if loaded from customer record
             if last.get("customerID"):
                 actual = last.get("actual_churn", "Unknown")
                 pred_label = "Churn" if last["prediction"] == 1 else "Retain"
@@ -914,7 +870,6 @@ if page == "Predict":
 
             st.markdown('<div class="section-kicker">Churn risk  ·  Local model output</div>', unsafe_allow_html=True)
 
-            # Gauge
             gauge = go.Figure(
                 go.Indicator(
                     mode="gauge+number",
@@ -941,7 +896,6 @@ if page == "Predict":
             )
             st.plotly_chart(gauge, use_container_width=True, config={"displayModeBar": False})
 
-            # Risk card
             st.markdown(
                 f'<div class="result-card" style="--result-color:{color}">'
                 f'<div class="result-title">{label}</div>'
@@ -950,7 +904,6 @@ if page == "Predict":
             )
             st.write("")
 
-            # Mini metric row
             c1, c2, c3 = st.columns(3)
             c1.markdown(
                 f'<div class="metric-card"><div class="metric-label">Model class</div>'
@@ -972,7 +925,6 @@ if page == "Predict":
             )
             st.write("")
 
-            # Feature contributions
             section_title(
                 "Top factors behind this prediction",
                 "Coefficient × encoded input contribution — not SHAP values",
@@ -991,7 +943,6 @@ if page == "Predict":
             else:
                 st.info("Feature-level contributions are not available for this model type.")
 
-            # Retention playbook
             section_title("Retention playbook", "Suggested actions based on the customer risk profile")
             actions = retention_actions(customer)
             for i, action in enumerate(actions, start=1):
@@ -1024,9 +975,6 @@ if page == "Predict":
             metric_card("Churn recall",   f"{MODEL_RECALL:.2f}%",   "Positive class: Churn = Yes", CYAN)
 
 
-# =============================================================================
-# PAGE: Analytics
-# =============================================================================
 elif page == "Analytics":
     page_header(
         "Cohort telemetry  /  Telco customer dataset",
@@ -1037,7 +985,6 @@ elif page == "Analytics":
     st.markdown('<div class="section-kicker">Active slice · choose filters in the sidebar</div>', unsafe_allow_html=True)
     st.write("")
 
-    # Sidebar filters
     with st.sidebar:
         st.markdown('<div class="section-kicker" style="margin-top:18px">Analytics filters</div>', unsafe_allow_html=True)
         contract_filter = st.multiselect(
@@ -1069,7 +1016,6 @@ elif page == "Analytics":
         avg_monthly  = analytics_df["MonthlyCharges"].mean()
         overall_rate = df["Churn"].eq("Yes").mean() * 100
 
-        # KPI row — 4 cards so nothing is cut off on smaller screens
         m1, m2, m3, m4 = st.columns(4, gap="medium")
         with m1: metric_card("Customer pool",      f"{len(analytics_df):,}", "Accounts in active slice", INDIGO)
         with m2: metric_card("Accounts churned",   f"{churned:,}",           f"{churn_rate:.1f}% of slice", CORAL)
@@ -1079,7 +1025,6 @@ elif page == "Analytics":
         st.write("")
         st.write("")
 
-        # Donut + contract churn
         left, right = st.columns([1, 1.45], gap="medium")
         with left:
             with st.container(border=True):
@@ -1109,7 +1054,6 @@ elif page == "Analytics":
                     use_container_width=True, config={"displayModeBar": False},
                 )
 
-        # Internet + payment
         c1, c2 = st.columns(2, gap="medium")
         with c1:
             with st.container(border=True):
@@ -1126,7 +1070,6 @@ elif page == "Analytics":
                     use_container_width=True, config={"displayModeBar": False},
                 )
 
-        # Tenure + monthly charges
         c1, c2 = st.columns(2, gap="medium")
         with c1:
             with st.container(border=True):
@@ -1147,7 +1090,6 @@ elif page == "Analytics":
                 box.update_layout(xaxis_title="", yaxis_title="Monthly charges ($)", showlegend=False)
                 st.plotly_chart(style_fig(box, 320), use_container_width=True, config={"displayModeBar": False})
 
-        # Correlation + senior cohort
         c1, c2 = st.columns([1.3, 1], gap="medium")
         with c1:
             with st.container(border=True):
@@ -1174,7 +1116,6 @@ elif page == "Analytics":
                 senior_fig.update_layout(showlegend=False, xaxis_title="", yaxis_title="Churn rate (%)")
                 st.plotly_chart(style_fig(senior_fig, 340), use_container_width=True, config={"displayModeBar": False})
 
-        # NEW — Avg monthly spend vs churn scatter
         with st.container(border=True):
             section_title("Tenure vs monthly charges", "Scatter coloured by actual churn label — low tenure & high charges = hotspot")
             scatter = px.scatter(
@@ -1186,9 +1127,6 @@ elif page == "Analytics":
             st.plotly_chart(style_fig(scatter, 340), use_container_width=True, config={"displayModeBar": False})
 
 
-# =============================================================================
-# PAGE: Model Insights
-# =============================================================================
 elif page == "Model Insights":
     page_header(
         "Model diagnostics  /  Coefficient-based explanation",
@@ -1251,7 +1189,6 @@ elif page == "Model Insights":
                     unsafe_allow_html=True,
                 )
 
-    # ── Confusion Matrix & ROC Curve ──────────────────────────────────────────
     st.write("")
     st.write("")
     cm_col, roc_col = st.columns([1, 1], gap="medium")
@@ -1276,7 +1213,6 @@ elif page == "Model Insights":
             st.plotly_chart(plot_roc_curve(saved_roc, MODEL_ROC_AUC), use_container_width=True, config={"displayModeBar": False})
             st.caption(f"An AUC of {MODEL_ROC_AUC:.4f} demonstrates high discriminatory power significantly above random guessing (0.50).")
 
-    # ── Multi-Model Architecture Comparison ──────────────────────────────────
     st.write("")
     st.write("")
     with st.container(border=True):
@@ -1321,9 +1257,6 @@ elif page == "Model Insights":
     )
 
 
-# =============================================================================
-# PAGE: Data
-# =============================================================================
 elif page == "Data":
     page_header(
         "Dataset telemetry  /  Customer feature registry",
@@ -1343,7 +1276,6 @@ elif page == "Data":
 
     st.write("")
 
-    # Filters — 4 columns so they don't overflow on standard screens
     filter1, filter2, filter3, filter4 = st.columns([1.1, 1.1, 1.1, 1.0])
     with filter1:
         risk_label_filter = st.selectbox("Actual churn label", ["All", "Churned", "Retained"], key="data_churn_filter")
@@ -1354,7 +1286,6 @@ elif page == "Data":
     with filter4:
         max_tenure_filter = st.selectbox("Tenure band", ["All", "0–12 mo", "13–36 mo", "37–72 mo"], key="data_tenure_filter")
 
-    # Gender filter on a second row
     gf_col, _ = st.columns([1.1, 3.3])
     with gf_col:
         gender_filter = st.selectbox("Gender", ["All", "Male", "Female"], key="data_gender_filter")
@@ -1446,9 +1377,6 @@ elif page == "Data":
                     st.rerun()
 
 
-# =============================================================================
-# PAGE: Summary (new)
-# =============================================================================
 elif page == "Summary":
     page_header(
         "Project overview  /  Academic ML project",
@@ -1457,7 +1385,6 @@ elif page == "Summary":
         "from the Telco Customer Churn analysis.",
     )
 
-    # Dataset snapshot
     with st.container(border=True):
         section_title("📊 Dataset at a glance", "WA_Fn-UseC_-Telco-Customer-Churn · IBM sample dataset")
         st.write("")
@@ -1469,7 +1396,6 @@ elif page == "Summary":
 
     st.write("")
 
-    # Model pipeline
     with st.container(border=True):
         section_title("🤖 Model pipeline", "scikit-learn Pipeline with preprocessing and classifier steps")
         col1, col2 = st.columns(2, gap="large")
@@ -1507,7 +1433,6 @@ elif page == "Summary":
 
     st.write("")
 
-    # Business insights
     with st.container(border=True):
         section_title("💡 Key business insights", "Derived from the coefficient analysis and cohort analytics")
         st.write("")
@@ -1533,7 +1458,6 @@ elif page == "Summary":
 
     st.write("")
 
-    # How to run
     with st.container(border=True):
         section_title("🚀 How to run the project", "Setup and launch instructions")
         st.code(
@@ -1550,9 +1474,6 @@ elif page == "Summary":
         )
 
 
-# -----------------------------------------------------------------------------
-# Footer
-# -----------------------------------------------------------------------------
 st.markdown("---")
 st.markdown(
     '<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#7F899C;font:12px JetBrains Mono,monospace">'
