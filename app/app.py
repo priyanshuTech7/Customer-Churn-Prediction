@@ -660,11 +660,11 @@ with st.sidebar:
         "Workspace",
         ["Predict", "Analytics", "Model Insights", "Data", "Summary"],
         format_func=lambda v: {
-            "Predict":        "◉   Predict  ·  Simulator & Playbook",
-            "Analytics":      "⌁   Analytics  ·  Cohort & Retention",
-            "Model Insights": "⌁   Model Insights  ·  Coefficients",
-            "Data":           "▦   Data  ·  Customer Dataset",
-            "Summary":        "◈   Summary  ·  Project Overview",
+            "Predict":        "Predict  ·  Simulator & Playbook",
+            "Analytics":      "Analytics  ·  Cohort & Retention",
+            "Model Insights": "Model Insights  ·  Coefficients",
+            "Data":           "Data  ·  Customer Dataset",
+            "Summary":        "Summary  ·  Project Overview",
         }[v],
         label_visibility="collapsed",
         key="workspace_page",
@@ -683,7 +683,7 @@ with st.sidebar:
     )
     st.markdown(
         '<div style="margin-top:12px;padding:10px 12px;background:#171D27;border:1px solid rgba(255,255,255,.07);border-radius:11px;">'
-        '<div style="font-weight:700;font-size:12px">◉  Customer Churn Project</div>'
+        '<div style="font-weight:700;font-size:12px">Customer Churn Project</div>'
         '<div style="font:12px JetBrains Mono;color:#929CAF;margin-top:3px">Machine Learning · IT V SEM</div></div>',
         unsafe_allow_html=True,
     )
