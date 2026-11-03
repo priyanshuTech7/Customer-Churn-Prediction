@@ -361,14 +361,6 @@ For commercial licensing inquiries, please contact the project maintainers.
 
 ---
 
-## 📞 Support
-
-- 📧 **Email**: support@churnproject.example.com
-- 💬 **Issues**: [GitHub Issues](https://github.com/yourusername/Customer-Churn-Prediction1/issues)
-- 📚 **Docs**: [Wiki](https://github.com/yourusername/Customer-Churn-Prediction1/wiki)
-
----
-
 <div align="center">
 
 **Built with ❤️ for data-driven customer success**
