@@ -295,6 +295,11 @@ We welcome contributions! Here's how you can help:
 - 🔧 **Pull Requests**: Fork, branch, commit, and submit for review
 - 📖 **Documentation**: Improve guides, add examples, fix typos
 
+### Contributors
+
+- **Priyanshu Soundarkar**
+- **Puneet Rai**
+
 ### Development Setup
 
 ```bash
