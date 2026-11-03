@@ -346,6 +346,13 @@ For commercial licensing inquiries, please contact the project maintainers.
 
 ---
 
+## 👥 Team Members
+
+- **Priyanshu Soundarkar**
+- **Puneet Rai**
+
+---
+
 ## 🙏 Acknowledgments
 
 - **Dataset**: [IBM Telco Customer Churn Dataset](https://www.kaggle.com/blastchar/telco-customer-churn)
