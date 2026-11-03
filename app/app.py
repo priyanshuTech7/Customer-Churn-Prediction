@@ -1337,7 +1337,7 @@ elif page == "Data":
         with heading_col:
             section_title(
                 "Customer feature registry",
-                f"Showing {min(500, len(data_view)):,} of {len(data_view):,} filtered records · "
+                f"Showing {len(data_view):,} filtered records · "
                 f"{total_records:,} rows in cleaned source",
             )
         with export_col:
@@ -1356,7 +1356,7 @@ elif page == "Data":
         ]
         show_cols = [c for c in show_cols if c in data_view.columns]
         st.dataframe(
-            data_view[show_cols].head(500),
+            data_view[show_cols],
             use_container_width=True,
             hide_index=True,
             height=520,
@@ -1371,7 +1371,7 @@ elif page == "Data":
         )
         st.caption(
             "The Churn column is the historical target label — it is displayed for exploration only "
-            "and is NOT supplied as an input to the prediction model. Showing up to 500 rows."
+            "and is NOT supplied as an input to the prediction model."
         )
 
         st.write("")
@@ -1380,7 +1380,7 @@ elif page == "Data":
         st.write("")
         sel_d_col, btn_d_col = st.columns([3, 1.2], vertical_alignment="bottom")
         with sel_d_col:
-            slice_ids = data_view["customerID"].head(250).tolist()
+            slice_ids = data_view["customerID"].tolist()
             slice_label_map = get_customer_search_dict(df)
             chosen_id = st.selectbox(
                 "Customer to inspect",
